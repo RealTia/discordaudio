@@ -1,39 +1,39 @@
-// Vencord Plugin für Audio Processing Deaktivierung
-// Diese Datei sollte in den Vencord plugins Ordner kopiert werden
+// Vencord Plugin for Audio Processing Disabling
+// This file should be copied to the Vencord plugins folder
 
-// @ts-ignore - Vencord-spezifische Imports
+// @ts-ignore - Vencord-specific imports
 import { Devs } from "@utils/constants";
-// @ts-ignore - Vencord-spezifische Imports
+// @ts-ignore - Vencord-specific imports
 import definePlugin, { OptionType } from "@utils/types";
-// @ts-ignore - Vencord-spezifische Imports
+// @ts-ignore - Vencord-specific imports
 import { findByPropsLazy } from "@webpack";
 
 const MediaEngineStore = findByPropsLazy("getMediaEngine");
 
 export default definePlugin({
     name: "DisableAudioProcessing",
-    description: "Deaktiviert das neue Audio Processing für ein natürlicheres Mikrofon-Signal",
+    description: "Disables Discord's new audio processing for a more natural microphone signal",
     authors: [Devs.YourName],
     dependencies: [],
     options: {
         disableAudioProcessing: {
             type: OptionType.BOOLEAN,
-            description: "Audio Processing deaktivieren",
+            description: "Disable audio processing",
             default: true,
         },
         disableNoiseSuppression: {
             type: OptionType.BOOLEAN,
-            description: "Rauschunterdrückung deaktivieren",
+            description: "Disable noise suppression",
             default: true,
         },
         disableEchoCancellation: {
             type: OptionType.BOOLEAN,
-            description: "Echo-Unterdrückung deaktivieren",
+            description: "Disable echo cancellation",
             default: true,
         },
         disableAutomaticGainControl: {
             type: OptionType.BOOLEAN,
-            description: "Automatische Verstärkungsregelung deaktivieren",
+            description: "Disable automatic gain control",
             default: true,
         }
     },
@@ -43,7 +43,7 @@ export default definePlugin({
     },
 
     stop() {
-        // Stelle Standard-Einstellungen wieder her
+        // Restore default settings
         this.restoreDefaultSettings();
     },
 
@@ -51,28 +51,28 @@ export default definePlugin({
         try {
             const mediaEngine = MediaEngineStore?.getMediaEngine?.();
             if (!mediaEngine) {
-                console.warn("[DisableAudioProcessing] MediaEngine nicht gefunden");
+                console.warn("[DisableAudioProcessing] MediaEngine not found");
                 return;
             }
 
-            // Hole aktuelle Einstellungen
+            // Get current settings
             const settings = this.settings;
 
-            // Erstelle Audio-Constraints basierend auf Plugin-Einstellungen
+            // Create audio constraints based on plugin settings
             const audioConstraints: MediaTrackConstraints = {
                 echoCancellation: !settings.disableEchoCancellation,
                 noiseSuppression: !settings.disableNoiseSuppression,
                 autoGainControl: !settings.disableAutomaticGainControl,
             };
 
-            // Wenn Audio Processing komplett deaktiviert werden soll
+            // If audio processing should be completely disabled
             if (settings.disableAudioProcessing) {
                 audioConstraints.echoCancellation = false;
                 audioConstraints.noiseSuppression = false;
                 audioConstraints.autoGainControl = false;
             }
 
-            // Speichere ursprüngliche Einstellungen für Wiederherstellung
+            // Save original settings for restoration
             if (!this.originalSettings) {
                 this.originalSettings = {
                     echoCancellation: audioConstraints.echoCancellation,
@@ -81,17 +81,17 @@ export default definePlugin({
                 };
             }
 
-            // Wende neue Einstellungen an
+            // Apply new settings
             this.updateMediaEngineSettings(mediaEngine, audioConstraints);
 
         } catch (error) {
-            console.error("[DisableAudioProcessing] Fehler beim Anwenden der Audio-Einstellungen:", error);
+            console.error("[DisableAudioProcessing] Error applying audio settings:", error);
         }
     },
 
     updateMediaEngineSettings(mediaEngine: any, constraints: MediaTrackConstraints) {
         try {
-            // Versuche verschiedene Methoden, um die Einstellungen zu aktualisieren
+            // Try different methods to update settings
             if (mediaEngine.setAudioConstraints) {
                 mediaEngine.setAudioConstraints(constraints);
             } else if (mediaEngine.updateAudioConstraints) {
@@ -100,31 +100,31 @@ export default definePlugin({
                 mediaEngine.setMediaConstraints({ audio: constraints });
             }
 
-            // Aktualisiere auch Discord's interne Audio-Einstellungen
+            // Also update Discord's internal audio settings
             this.updateDiscordAudioSettings(constraints);
 
         } catch (error) {
-            console.error("[DisableAudioProcessing] Fehler beim Aktualisieren der MediaEngine:", error);
+            console.error("[DisableAudioProcessing] Error updating MediaEngine:", error);
         }
     },
 
     updateDiscordAudioSettings(constraints: MediaTrackConstraints) {
         try {
-            // Finde Discord's Audio-Einstellungen
+            // Find Discord's audio settings
             const audioSettings = findByPropsLazy("getAudioInputDevice");
             if (audioSettings) {
-                // Versuche Discord's Audio-Einstellungen zu überschreiben
+                // Try to override Discord's audio settings
                 if (audioSettings.setAudioInputDevice) {
-                    // Hole aktuelles Audio-Device
+                    // Get current audio device
                     const currentDevice = audioSettings.getAudioInputDevice?.();
                     if (currentDevice) {
-                        // Setze Device mit neuen Constraints neu
+                        // Set device with new constraints
                         audioSettings.setAudioInputDevice(currentDevice, constraints);
                     }
                 }
             }
         } catch (error) {
-            console.error("[DisableAudioProcessing] Fehler beim Aktualisieren der Discord Audio-Einstellungen:", error);
+            console.error("[DisableAudioProcessing] Error updating Discord audio settings:", error);
         }
     },
 
@@ -137,12 +137,12 @@ export default definePlugin({
                 this.updateMediaEngineSettings(mediaEngine, this.originalSettings);
             }
         } catch (error) {
-            console.error("[DisableAudioProcessing] Fehler beim Wiederherstellen der Standard-Einstellungen:", error);
+            console.error("[DisableAudioProcessing] Error restoring default settings:", error);
         }
     },
 
     onSettingsChange() {
-        // Wende neue Einstellungen an, wenn sich die Plugin-Einstellungen ändern
+        // Apply new settings when plugin settings change
         this.applyAudioSettings();
     },
 }); 
