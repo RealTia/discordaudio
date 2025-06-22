@@ -16,7 +16,7 @@ This Vencord plugin disables Discord's audio processing for a more natural micro
 
 2. **Install Plugin**:
    - Copy the `DisableAudioProcessing.ts` file to the Vencord plugins folder:
-     - **Windows**: `%APPDATA%\Vencord\plugins\`
+     - **Windows**: `%APPDATA%\Vencord\userplugins\`
      - **macOS**: `~/Library/Application Support/Vencord/plugins/`
      - **Linux**: `~/.config/Vencord/plugins/`
 
