@@ -1,5 +1,8 @@
-// Vencord Plugin for Audio Processing Disabling
-// This file should be copied to the Vencord plugins folder
+/*
+* Vencord, a Discord client mod
+* Copyright (c) 2025 Vendicated and contributors*
+* SPDX-License-Identifier: GPL-3.0-or-later
+*/
 
 // @ts-ignore - Vencord-specific imports
 import { Devs } from "@utils/constants";
@@ -13,7 +16,7 @@ const MediaEngineStore = findByPropsLazy("getMediaEngine");
 export default definePlugin({
     name: "DisableAudioProcessing",
     description: "Disables Discord's new audio processing for a more natural microphone signal",
-    authors: [Devs.YourName],
+    authors: [Devs.definiert],
     dependencies: [],
     options: {
         disableAudioProcessing: {
