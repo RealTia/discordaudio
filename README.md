@@ -1,93 +1,93 @@
 # DisableAudioProcessing - Vencord Plugin
 
-Dieses Vencord Plugin deaktiviert Discord's Audio Processing für ein natürlicheres Mikrofon-Signal.
+This Vencord plugin disables Discord's audio processing for a more natural microphone signal.
 
 ## Features
 
-- **Audio Processing deaktivieren**: Komplett deaktiviert alle Audio-Verarbeitung
-- **Rauschunterdrückung deaktivieren**: Entfernt die automatische Rauschunterdrückung
-- **Echo-Unterdrückung deaktivieren**: Deaktiviert die Echo-Unterdrückung
-- **Automatische Verstärkungsregelung deaktivieren**: Deaktiviert die automatische Lautstärkeanpassung
+- **Disable Audio Processing**: Completely disables all audio processing
+- **Disable Noise Suppression**: Removes automatic noise suppression
+- **Disable Echo Cancellation**: Disables echo cancellation
+- **Disable Automatic Gain Control**: Disables automatic volume adjustment
 
 ## Installation
 
-1. **Vencord installieren** (falls noch nicht geschehen):
-   - Besuche [Vencord.dev](https://vencord.dev) und folge den Installationsanweisungen
+1. **Install Vencord** (if not already installed):
+   - Visit [Vencord.dev](https://vencord.dev) and follow the installation instructions
 
-2. **Plugin installieren**:
-   - Kopiere die Datei `DisableAudioProcessing.ts` in den Vencord plugins Ordner:
+2. **Install Plugin**:
+   - Copy the `DisableAudioProcessing.ts` file to the Vencord plugins folder:
      - **Windows**: `%APPDATA%\Vencord\plugins\`
      - **macOS**: `~/Library/Application Support/Vencord/plugins/`
      - **Linux**: `~/.config/Vencord/plugins/`
 
-3. **Discord neustarten**:
-   - Starte Discord vollständig neu, damit das Plugin geladen wird
+3. **Restart Discord**:
+   - Restart Discord completely so the plugin loads
 
-## Verwendung
+## Usage
 
-1. **Plugin aktivieren**:
-   - Öffne Discord
-   - Gehe zu Einstellungen → Vencord → Plugins
-   - Aktiviere "DisableAudioProcessing"
+1. **Enable Plugin**:
+   - Open Discord
+   - Go to Settings → Vencord → Plugins
+   - Enable "DisableAudioProcessing"
 
-2. **Einstellungen konfigurieren**:
-   - Im Plugin-Bereich findest du verschiedene Optionen:
-     - **Audio Processing deaktivieren**: Deaktiviert alle Audio-Verarbeitung auf einmal
-     - **Rauschunterdrückung deaktivieren**: Nur die Rauschunterdrückung ausschalten
-     - **Echo-Unterdrückung deaktivieren**: Nur die Echo-Unterdrückung ausschalten
-     - **Automatische Verstärkungsregelung deaktivieren**: Nur die automatische Lautstärkeanpassung ausschalten
+2. **Configure Settings**:
+   - In the plugin section, you'll find various options:
+     - **Disable Audio Processing**: Disables all audio processing at once
+     - **Disable Noise Suppression**: Only turn off noise suppression
+     - **Disable Echo Cancellation**: Only turn off echo cancellation
+     - **Disable Automatic Gain Control**: Only turn off automatic volume adjustment
 
-3. **Änderungen anwenden**:
-   - Änderungen werden automatisch angewendet
-   - Ein Neustart von Discord kann erforderlich sein
+3. **Apply Changes**:
+   - Changes are applied automatically
+   - A Discord restart may be required
 
-## Empfohlene Einstellungen
+## Recommended Settings
 
-Für das natürlichste Mikrofon-Signal:
-- ✅ **Audio Processing deaktivieren**: Aktiviert
-- ✅ **Rauschunterdrückung deaktivieren**: Aktiviert
-- ✅ **Echo-Unterdrückung deaktivieren**: Aktiviert
-- ✅ **Automatische Verstärkungsregelung deaktivieren**: Aktiviert
+For the most natural microphone signal:
+- ✅ **Disable Audio Processing**: Enabled
+- ✅ **Disable Noise Suppression**: Enabled
+- ✅ **Disable Echo Cancellation**: Enabled
+- ✅ **Disable Automatic Gain Control**: Enabled
 
-## Hinweise
+## Notes
 
-- **Mikrofon-Qualität**: Dieses Plugin funktioniert am besten mit hochwertigen Mikrofonen
-- **Umgebung**: In lauten Umgebungen kann es zu mehr Hintergrundgeräuschen kommen
-- **Discord-Einstellungen**: Stelle sicher, dass deine Discord Audio-Einstellungen korrekt konfiguriert sind
-- **Neustart**: Ein Neustart von Discord kann erforderlich sein, damit alle Änderungen vollständig wirksam werden
+- **Microphone Quality**: This plugin works best with high-quality microphones
+- **Environment**: In noisy environments, you may experience more background noise
+- **Discord Settings**: Make sure your Discord audio settings are properly configured
+- **Restart**: A Discord restart may be required for all changes to take full effect
 
 ## Troubleshooting
 
-**Plugin wird nicht geladen:**
-- Überprüfe, ob die Datei im richtigen Ordner liegt
-- Stelle sicher, dass Vencord korrekt installiert ist
-- Überprüfe die Discord-Konsole auf Fehlermeldungen
+**Plugin not loading:**
+- Check if the file is in the correct folder
+- Make sure Vencord is properly installed
+- Check Discord console for error messages
 
-**Audio-Einstellungen werden nicht angewendet:**
-- Starte Discord vollständig neu
-- Überprüfe, ob das Plugin in den Vencord-Einstellungen aktiviert ist
-- Teste verschiedene Mikrofon-Einstellungen in Discord
+**Audio settings not being applied:**
+- Restart Discord completely
+- Check if the plugin is enabled in Vencord settings
+- Test different microphone settings in Discord
 
-**Mikrofon funktioniert nicht mehr:**
-- Deaktiviere das Plugin temporär
-- Überprüfe deine Discord Audio-Einstellungen
-- Stelle sicher, dass das richtige Mikrofon ausgewählt ist
+**Microphone not working:**
+- Temporarily disable the plugin
+- Check your Discord audio settings
+- Make sure the correct microphone is selected
 
-## Technische Details
+## Technical Details
 
-Das Plugin arbeitet durch:
-1. **MediaEngine-Interaktion**: Greift auf Discord's interne MediaEngine zu
-2. **Audio-Constraints**: Setzt WebRTC Audio-Constraints für das Mikrofon
-3. **Discord-Integration**: Überschreibt Discord's interne Audio-Einstellungen
-4. **Einstellungsverwaltung**: Speichert und stellt ursprüngliche Einstellungen wieder her
+The plugin works by:
+1. **MediaEngine Interaction**: Accesses Discord's internal MediaEngine
+2. **Audio Constraints**: Sets WebRTC audio constraints for the microphone
+3. **Discord Integration**: Overrides Discord's internal audio settings
+4. **Settings Management**: Saves and restores original settings
 
 ## Support
 
-Bei Problemen oder Fragen:
-- Überprüfe die Discord-Konsole auf Fehlermeldungen
-- Stelle sicher, dass alle Abhängigkeiten korrekt installiert sind
-- Teste das Plugin in einer neuen Discord-Installation
+For problems or questions:
+- Check Discord console for error messages
+- Make sure all dependencies are properly installed
+- Test the plugin in a fresh Discord installation
 
-## Lizenz
+## License
 
-Dieses Plugin ist Open Source und kann frei verwendet und modifiziert werden. 
+This plugin is open source and can be freely used and modified. 
